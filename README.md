@@ -1,4 +1,8 @@
 # EarlyExitViT
+Project by Cornelius, Amir, and Katinka.
+
+## Project Description
+This project aims to significantly increase inference speed by introducing stacked Vision Transformers (ViTs) with early exiting capabilities based on classification confidence.
 
 ## Further Results
 Further results are displayed below: 
