@@ -12,8 +12,6 @@ This project aims to significantly increase inference speed by introducing stack
     <img width="235" alt="Model Architecture" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/d92549f0-2436-4241-a757-66a189cb4cee">
 </figure>
 
-<p><i><small>small sketch for the model architecture</small></i></p>
-
 The model architecture of this project will be similar to the base pre-trained ViT’s from the timm library by having an input embedding layer, a transformer block consisting of multiple transformer blocks and a prediction head. The difference is that our model architecture will insert a separate prediction head on top of each transformer block and make a prediction. We also add a confidence indicator at each prediction head that will be used to calculate a confidence score of stopping the model at the current prediction head. The confidence threshold of stopping will be a hyperparameter.
 
 When we created this model, we first fine-tuned the model weights to suit the dataset and the new model structure, then we added and trained the confidence weights to create a confidence indicator.
