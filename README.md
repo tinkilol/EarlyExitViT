@@ -3,11 +3,11 @@
 
 Project by Cornelius, Amir, and Katinka.
 
-## Project Description
+### Project Description
 
 This project aims to significantly increase inference speed by introducing stacked Vision Transformers (ViTs) with early exiting capabilities based on classification confidence.
 
-## Model Architecture
+### Model Architecture
 
 <figure>
     <img width="235" alt="Model Architecture" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/d92549f0-2436-4241-a757-66a189cb4cee">
@@ -17,7 +17,7 @@ The model architecture of this project will be similar to the base pre-trained V
 
 When we created this model, we first fine-tuned the model weights to suit the dataset and the new model structure, then we added and trained the confidence weights to create a confidence indicator.
 
-## Confidence
+### Confidence
 When each layer predicts the class of an image, we want to know how confident the layer is in its predictions. We therefore add and train a confidence indicator to each layer of the model, where we freeze all parameters of the model beside the confidence indicator. The confidence indicator per layer is simply calculated by a linear transformation of the prediction and calculating the softmax scores. Yielding the following expression:
 ```math
 \text{Confidence}_i = \text{softmax}(\text{linear layer}(\text{output\_prediction}_i))
@@ -26,7 +26,7 @@ When each layer predicts the class of an image, we want to know how confident th
 For layer i we evaluate the confidence level according to the final prediction of the model. Therefore, we use the prediction of the last layer as our confidence standard (“ground truth”). By using the model's final prediction as a confidence standard, we will see how confident each earlier layer is at predicting the same as the final layer, even if the final layer is wrong. The early confidence stopping is therefore not about stopping when predicting correctly in terms of the gold labels, but to stop early if the model is confident that the early layer prediction is the same as the last layer. So if the model is confident, it would not make sense to send images further in the model since the result would end up being the same. The main goal is to see if it is possible to apply early stopping by having a sufficiently strong confidence indicator. If the confidence is above a certain threshold at an early layer, we will assume that the layer will predict the same as the final layer with a confidence of at least C (threshold), and stop inference at that layer.
 
 
-## Results
+### Results
 
 Our results are from a comprehensive data analysis using our chosen model trained with a confidence indicator. The following plots are the distributions of early exit layers for six different thresholds: 0.5, 0.7, 0.8, 0.9, 0.95 and 0.99. 
 Above each bar is the percentage of how often the exited layer predicted the same class as the last layer. This shows how well the early confidence stopping did in terms of similarity to the predictions of the last layer. Additionally, the average exit layer and the overall similarity to the last layer is stated above each distribution.
@@ -79,7 +79,7 @@ Pushing the threshold even further, with extreme confidence thresholds of 0.999,
 The same is true for even more extreme confidence thresholds like 0.9999 and 1.0. The difference is that less images exit early, so the average exit layer increases, while the similarity to the last layer gets slightly better. Even with a confidence threshold of 1.0, which technically means the model is perfectly confident in predicting the same as the last layer, the model exits early on some images. In fact, some images exit as early as layer 6 with perfect confidence and perfect similarity to the last layer.
 
 
-## Code
+### Code
 
 To run our project go to our group project folder on fox:
 
