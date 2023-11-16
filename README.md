@@ -12,7 +12,7 @@ This project aims to significantly increase inference speed by introducing stack
 ### Model Architecture
 
 <figure>
-    <img width="235" alt="Model Architecture" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/d92549f0-2436-4241-a757-66a189cb4cee">
+    <img width="300" alt="Model Architecture" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/d92549f0-2436-4241-a757-66a189cb4cee">
 </figure>
    
 The model architecture of this project will be similar to the base pre-trained ViT’s from the timm library by having an input embedding layer, a transformer block consisting of multiple transformer blocks and a prediction head.   
@@ -41,51 +41,61 @@ Our results are from a comprehensive data analysis using our chosen model traine
 Above each bar is the percentage of how often the exited layer predicted the same class as the last layer. This shows how well the early confidence stopping did in terms of similarity to the predictions of the last layer. Additionally, the average exit layer and the overall similarity to the last layer as well as the current threshold is stated above each distribution.
 
 <figure>
-    <img width="235" alt="0.5" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/137831b9-0748-4351-967d-c0c887963d4b">
+    <img width="300" alt="0.5" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/137831b9-0748-4351-967d-c0c887963d4b">
 </figure>
 
 <figure>
-    <img width="235" alt="0.7" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/54d78f6d-5e27-466f-af36-0e7894172dbd">
+    <img width="300" alt="0.7" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/54d78f6d-5e27-466f-af36-0e7894172dbd">
 </figure>
 
 We clearly see a shift in the distribution towards the right (later layers) as we increase the threshold. Additionally, the similarity with the last layer and average exit layer increases as we increase the confidence threshold, which is what we were looking for.
 
 <figure>
-    <img width="235" alt="0.8" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/eff9d52e-f7f7-4ca9-862b-29416f10a190">
+    <img width="300" alt="0.8" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/eff9d52e-f7f7-4ca9-862b-29416f10a190">
 </figure>
 
 <figure>
-    <img width="235" alt="0.9" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/ce5db17d-60a1-4818-9a55-a232c96a2575">
+    <img width="300" alt="0.9" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/ce5db17d-60a1-4818-9a55-a232c96a2575">
 </figure>
 
 The results are not satisfactory in terms of similarity to the last layer for any confidence thresholds below 0.95, which gets a 90% similarity to the last layer, since we are looking for a reduction in inference time without compromising performance.
 
 <figure>
-    <img width="235" alt="0.95" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/4496a6ec-9562-4ea2-b845-46d3171af0ff">
+    <img width="300" alt="0.95" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/4496a6ec-9562-4ea2-b845-46d3171af0ff">
 </figure>
 
 <figure>
-    <img width="235" alt="0.99" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/ca89185a-8ae4-44a1-b70f-fb02b77f8e2b">
+    <img width="300" alt="0.99" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/ca89185a-8ae4-44a1-b70f-fb02b77f8e2b">
 </figure>
 
 Even with such a high confidence threshold, the model performs well in terms of early stopping. With a confidence threshold of 0.95, we get an average exit layer of `7.73` and a similarity to the last layer of 90%, which almost halves the number of layers the images have to pass through to get a prediction, while making 90% of the same predictions. This seems like a decent time/accuracy tradeoff.
 The distribution with a confidence threshold of 0.99 has even better results. 97% similarity to the last layer and an average exit layer of `8.84`, which means over 25% reduction in the total number of layers the images have to pass through. Additionally, with a 0.99 confidence threshold over half of the images exit early, which is great in terms of time-accuracy tradeoff.
 
 <figure>
-    <img width="235" alt="0.999" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/f685afb7-5888-41d1-876f-f3df6ee06f1d">
+    <img width="300" alt="0.999" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/f685afb7-5888-41d1-876f-f3df6ee06f1d">
 </figure>
 
 <figure>
-    <img width="235" alt="0.9999" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/4f9404d1-ae76-44c2-8287-411edfb9daa5">
+    <img width="300" alt="0.9999" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/4f9404d1-ae76-44c2-8287-411edfb9daa5">
 </figure>
 
 <figure>
-    <img width="235" alt="1" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/9c34dc1d-4acd-4ad7-9c2c-924c581782de"> 
+    <img width="300" alt="1" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/9c34dc1d-4acd-4ad7-9c2c-924c581782de"> 
 </figure>
 
 Pushing the threshold even further, with extreme confidence thresholds of 0.999, 0.9999 and 1.0. We see that we actually benefit from it in terms of time and early stopping. Using 0.999 as confidence threshold gives almost the exact same predictions as the last layer, while having an average exit layer of `10.06`, which means saved inference time while not compromising accuracy. With such extreme confidence thresholds, some images still exit at early layers like layer `3` and `4`.
 
 The same is true for even more extreme confidence thresholds like 0.9999 and 1.0. The difference is that less images exit early, so the average exit layer increases, while the similarity to the last layer gets slightly better. Even with a confidence threshold of 1.0, which technically means the model is perfectly confident in predicting the same as the last layer, the model exits early on some images. In fact, some images exit as early as layer `6` with perfect confidence and perfect similarity to the last layer.
+
+<figure>
+    <img width="400" alt="diffthresholds" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/77c3ff8c-47e8-4e22-a4c1-5c345b8760e9"> 
+</figure>
+
+<figure>
+    <img width="400" alt="diffthresholds2" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/562d698f-aec7-45d1-b783-ba5e4ce9c766"> 
+</figure>
+
+<p><i><small>Exit Layers for different Thresholds</small></i></p>
 
    
 ### Code
@@ -119,5 +129,5 @@ This will do the following:
 - True label
 
    
-## Dataset
+### Dataset
 As Dataset we used Caltech256.
