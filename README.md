@@ -68,8 +68,8 @@ The results are not satisfactory in terms of similarity to the last layer for an
     <img width="235" alt="0.99" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/ca89185a-8ae4-44a1-b70f-fb02b77f8e2b">
 </figure>
 
-Even with such a high confidence threshold, the model performs well in terms of early stopping. With a confidence threshold of 0.95, we get an average exit layer of 7.73 and a similarity to the last layer of 90%, which almost halves the number of layers the images have to pass through to get a prediction, while making 90% of the same predictions. This seems like a decent time/accuracy tradeoff.
-The distribution with a confidence threshold of 0.99 has even better results. 97% similarity to the last layer and an average exit layer of 8.84, which means over 25% reduction in the total number of layers the images have to pass through. Additionally, with a 0.99 confidence threshold over half of the images exit early, which is great in terms of time-accuracy tradeoff.
+Even with such a high confidence threshold, the model performs well in terms of early stopping. With a confidence threshold of 0.95, we get an average exit layer of `7.73` and a similarity to the last layer of 90%, which almost halves the number of layers the images have to pass through to get a prediction, while making 90% of the same predictions. This seems like a decent time/accuracy tradeoff.
+The distribution with a confidence threshold of 0.99 has even better results. 97% similarity to the last layer and an average exit layer of `8.84`, which means over 25% reduction in the total number of layers the images have to pass through. Additionally, with a 0.99 confidence threshold over half of the images exit early, which is great in terms of time-accuracy tradeoff.
 
 <figure>
     <img width="235" alt="0.999" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/f685afb7-5888-41d1-876f-f3df6ee06f1d">
@@ -83,17 +83,17 @@ The distribution with a confidence threshold of 0.99 has even better results. 97
     <img width="235" alt="1" src="https://github.com/tinkilol/EarlyExitViT/assets/116383349/9c34dc1d-4acd-4ad7-9c2c-924c581782de"> 
 </figure>
 
-Pushing the threshold even further, with extreme confidence thresholds of 0.999, 0.9999 and 1.0. We see that we actually benefit from it in terms of time and early stopping. Using 0.999 as confidence threshold gives almost the exact same predictions as the last layer, while having an average exit layer of 10.06, which means saved inference time while not compromising accuracy. With such extreme confidence thresholds, some images still exit at early layers like layer 3 and 4.
+Pushing the threshold even further, with extreme confidence thresholds of 0.999, 0.9999 and 1.0. We see that we actually benefit from it in terms of time and early stopping. Using 0.999 as confidence threshold gives almost the exact same predictions as the last layer, while having an average exit layer of `10.06`, which means saved inference time while not compromising accuracy. With such extreme confidence thresholds, some images still exit at early layers like layer `3` and `4`.
 
-The same is true for even more extreme confidence thresholds like 0.9999 and 1.0. The difference is that less images exit early, so the average exit layer increases, while the similarity to the last layer gets slightly better. Even with a confidence threshold of 1.0, which technically means the model is perfectly confident in predicting the same as the last layer, the model exits early on some images. In fact, some images exit as early as layer 6 with perfect confidence and perfect similarity to the last layer.
+The same is true for even more extreme confidence thresholds like 0.9999 and 1.0. The difference is that less images exit early, so the average exit layer increases, while the similarity to the last layer gets slightly better. Even with a confidence threshold of 1.0, which technically means the model is perfectly confident in predicting the same as the last layer, the model exits early on some images. In fact, some images exit as early as layer `6` with perfect confidence and perfect similarity to the last layer.
 
    
 ### Code
 
 In this repository, you can also find our code. 
-- In 'confidence_dataframes', we stored the different confidence models and did the data analysis
-- In 'src', you can find our main code
-- In 'demo', we provided a small demo to show, how our model works.
+- In `confidence_dataframes`, we stored the different confidence models and did the data analysis
+- In `src`, you can find our main code
+- In `demo`, we provided a small demo to show, how our model works.
 
 To run the demo version of our project go to our group project folder on fox:
 
