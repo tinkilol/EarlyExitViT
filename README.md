@@ -18,7 +18,28 @@ Further results are displayed below:
 ![for_poster3](https://github.com/tinkilol/EarlyExitViT/assets/116383349/6d663b91-d2e8-443e-9a5b-2673ca59c7d6)
 
 ## Code
-To see the code, go to folder "code" and then "src" for the base model and "testing_confidence" for the confidence model. Disclaimer: The code probably doesn't work, you'd have to modify it a bit.
+To run our project go to our group project folder on fox:
+
+    /fp/projects01/ec232/g05/g05-p3
+
+Once you are here, all you need to do is run:
+
+    make
+
+This will do the following:
+
+    - Load the Caltech256 data from fox
+    - Load all models needed to run a demonstration of how confidence stopping work
+    - Pick 10 random images and run them through:
+            - The confidence model with confidence threshold 0.95 for early stopping
+            - The same model without confidence (for comparison)
+    - For each image, the demonstration will print:
+            - At what layer the confidence model stopped
+            - Confidence of predicting the same as the last layer (original model) on a 0.0 - 1.0 scale
+            - Time saved by stopping early using the confidence threshold
+            - Early confidence stopping model prediction
+            - Original model (last layer) prediction
+            - True label
 
 ## Dataset
 As Dataset we used Caltech256. To make the code work, you'd have to download that dataset.
