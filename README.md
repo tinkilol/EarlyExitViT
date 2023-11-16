@@ -87,7 +87,7 @@ The same is true for even more extreme confidence thresholds like 0.9999 and 1.0
 
 ### Code
 
-In this repository, you can also find our code. 
+In this repository, you can also find our code. In 'confidence_dataframes', we stored the different confidence models and did the data analysis. In 'src', you can find our main code. In 'demo', we provided a small demo to show, how our model works.
 
 To run the demo version of our project go to our group project folder on fox:
 
