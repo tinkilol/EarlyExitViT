@@ -1,7 +1,7 @@
 # Early Confidence Stopping in Inference Time (ECSIT)
 ## Lightning inference time with ViTs
 
-Project by Cornelius, Amir, and Katinka.
+*Project by Cornelius, Amir, and Katinka*
 
 ### Project Description
 
