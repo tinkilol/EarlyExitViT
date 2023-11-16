@@ -20,8 +20,9 @@ When we created this model, we first fine-tuned the model weights to suit the da
 
 ## Confidence
 When each layer predicts the class of an image, we want to know how confident the layer is in its predictions. We therefore add and train a confidence indicator to each layer of the model, where we freeze all parameters of the model beside the confidence indicator. The confidence indicator per layer is simply calculated by a linear transformation of the prediction and calculating the softmax scores. Yielding the following expression:
-
-    <p>Confidence<sub>i</sub> = softmax(linear layer(output_prediction<sub>i</sub>))</p>
+```math
+\text{Confidence}_i = \text{softmax}(\text{linear layer}(\text{output\_prediction}_i))
+```
 
 For layer i we evaluate the confidence level according to the final prediction of the model. Therefore, we use the prediction of the last layer as our confidence standard (“ground truth”). By using the model's final prediction as a confidence standard, we will see how confident each earlier layer is at predicting the same as the final layer, even if the final layer is wrong. The early confidence stopping is therefore not about stopping when predicting correctly in terms of the gold labels, but to stop early if the model is confident that the early layer prediction is the same as the last layer. So if the model is confident, it would not make sense to send images further in the model since the result would end up being the same. The main goal is to see if it is possible to apply early stopping by having a sufficiently strong confidence indicator. If the confidence is above a certain threshold at an early layer, we will assume that the layer will predict the same as the final layer with a confidence of at least C (threshold), and stop inference at that layer.
 
