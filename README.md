@@ -1,4 +1,5 @@
-# EarlyExitViT
+# Lightning inference time with ViTs
+## Early Confidence Stopping in Inference Time (ECSIT)
 
 Project by Cornelius, Amir, and Katinka.
 
